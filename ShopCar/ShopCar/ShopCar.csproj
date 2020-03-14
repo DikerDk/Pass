@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shoping.BLL\Shoping.BLL.csproj" />
+    <ProjectReference Include="..\Shoping.DAL\Shoping.DAL.csproj" />
+    <ProjectReference Include="..\Shoping.PL\Shoping.PL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\df\" />
+  </ItemGroup>
+
+
+
+</Project>
