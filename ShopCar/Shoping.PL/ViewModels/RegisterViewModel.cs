@@ -9,31 +9,26 @@ namespace Shoping.PL.ViewModels
 {
     public class RegisterViewModel
     {
-        [Required]
-        public string FirstName { get; set; }
 
-        [Required]
-        public string LastName { get; set; }
 
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required]
-        [RegularExpression(@"^\+[0-9]{11,12}$", ErrorMessage = "Wrong phone number")]
-        public string PhoneNumber { get; set; }
-
+        [Display(Name = "Год рождения")]
+        public int Year { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [StringLength(100, ErrorMessage = "Поле {0} должно иметь минимум {2} и максимум {1} символов.", MinimumLength = 5)]
+        [Display(Name = "Пароль")]
         public string Password { get; set; }
 
         [Required]
+        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Подтвердить пароль")]
         public string PasswordConfirm { get; set; }
     }
 }
