@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,74 +15,74 @@ using Microsoft.Extensions.Hosting;
 using Shoping.BLL.Service;
 using Shoping.DAL.EF;
 using Shoping.DAL.Entities;
+using Shoping.DAL.IRepositories;
+using Shoping.DAL.Repositories;
 
 namespace ShopCar
 {
     public class Startup
-    {   
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         public IConfiguration Configuration { get; }
-        public Startup(IConfiguration configuration) => Configuration = configuration;
+    
 
-       
-
-      /*  public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AppDBContext>
-        {
-            public AppDBContext CreateDbContext(string[] args)
+            public void ConfigureServices(IServiceCollection services)
             {
-                IConfigurationRoot configuration = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json")
-                    .Build();
-                var builder = new DbContextOptionsBuilder<AppDBContext>();
-                var connectionString = configuration.GetConnectionString("DefaultConnection");
-                builder.UseSqlServer(connectionString);
-                return new AppDBContext(builder.Options);
-            }
-        }*/
-        public void ConfigureServices(IServiceCollection services)
-        {
-            //подключаем конфиг из appsetting.json
-            Configuration.Bind("Project", new Config());
-
-            services.AddDbContext<AppDBContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+               // РїРѕР»СѓС‡Р°РµРј СЃС‚СЂРѕРєСѓ РїРѕРґРєР»СЋС‡РµРЅРёСЏ РёР· С„Р°Р№Р»Р° РєРѕРЅС„РёРіСѓСЂР°С†РёРё
+                string connection = Configuration.GetConnectionString("DefaultConnection");
+               // РґРѕР±Р°РІР»СЏРµРј РєРѕРЅС‚РµРєСЃС‚ MobileContext РІ РєР°С‡РµСЃС‚РІРµ СЃРµСЂРІРёСЃР° РІ РїСЂРёР»РѕР¶РµРЅРёРµ
+                services.AddDbContext<AppDBContext>(options =>
+                options.UseSqlServer(connection));
+            services.AddTransient<ITextFieldsRepository, EFTextFieldsRepository>();
+            services.AddTransient<IServiceItemsRepository, EFServiceItemsRepository>();
+            services.AddTransient<DataManager>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>(opts => {
-                opts.Password.RequiredLength = 5;   // минимальная длина
-                opts.Password.RequireNonAlphanumeric = false;   // требуются ли не алфавитно-цифровые символы
-                opts.Password.RequireLowercase = false; // требуются ли символы в нижнем регистре
-                opts.Password.RequireUppercase = false; // требуются ли символы в верхнем регистре
-                opts.Password.RequireDigit = false; // требуются ли цифры
+                opts.Password.RequiredLength = 5;   
+                opts.Password.RequireNonAlphanumeric = false;   
+                opts.Password.RequireLowercase = false; 
+                opts.Password.RequireUppercase = false; 
+                opts.Password.RequireDigit = false; 
             })
                .AddEntityFrameworkStores<AppDBContext>();
 
+
+
+
+
             services.AddControllersWithViews();
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-               
-                app.UseHsts();
-            }
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseRouting();
-            app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+
+            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
-        }
+                if (env.IsDevelopment())
+                {
+                    app.UseDeveloperExceptionPage();
+                }
+                else
+                {
+                    app.UseExceptionHandler("/Home/Error");
+                    app.UseHsts();
+                }
+                app.UseHttpsRedirection();
+                app.UseStaticFiles();
+
+                app.UseRouting();
+
+                app.UseAuthorization();
+
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllerRoute(
+                        name: "default",
+                        pattern: "{controller=Home}/{action=Index}/{id?}");
+                });
+            }
+        
     }
 }

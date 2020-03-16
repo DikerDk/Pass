@@ -6,22 +6,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ShopCar.Models;
+using Shoping.DAL.EF;
 
 namespace ShopCar.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+      
+        private readonly DataManager dataManager;
+        public HomeController(DataManager dataManager)
         {
-            _logger = logger;
+            this.dataManager = dataManager;
         }
-
         public IActionResult Index()
         {
-            return View();
+            return View(dataManager.ServiceItems.GetServiceItems());
         }
+
+       
 
         public IActionResult Privacy()
         {

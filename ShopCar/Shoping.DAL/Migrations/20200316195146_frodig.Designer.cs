@@ -10,8 +10,8 @@ using Shoping.DAL.EF;
 namespace Shoping.DAL.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20200315151847_as")]
-    partial class @as
+    [Migration("20200316195146_frodig")]
+    partial class frodig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -186,6 +186,62 @@ namespace Shoping.DAL.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Shoping.DAL.Entities.ServiceItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DateAdded");
+
+                    b.Property<string>("MetaDescription");
+
+                    b.Property<string>("MetaKeywords");
+
+                    b.Property<string>("MetaTitle");
+
+                    b.Property<string>("Subtitle");
+
+                    b.Property<string>("Text");
+
+                    b.Property<string>("Title")
+                        .IsRequired();
+
+                    b.Property<string>("TitleImagePath");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ServiceItems");
+                });
+
+            modelBuilder.Entity("Shoping.DAL.Entities.TextField", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CodeWord")
+                        .IsRequired();
+
+                    b.Property<DateTime>("DateAdded");
+
+                    b.Property<string>("MetaDescription");
+
+                    b.Property<string>("MetaKeywords");
+
+                    b.Property<string>("MetaTitle");
+
+                    b.Property<string>("Subtitle");
+
+                    b.Property<string>("Text");
+
+                    b.Property<string>("Title");
+
+                    b.Property<string>("TitleImagePath");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TextFields");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

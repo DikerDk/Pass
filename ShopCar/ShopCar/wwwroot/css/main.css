@@ -1191,3 +1191,12 @@ ul.link-list li {
     line-height: 1.5em; }
     #copyright a {
       color: #A6A88F; } }
+.div-box{
+    padding:15px;
+    ladel{
+             display:block;
+         }
+         a{
+             display:block;
+         }
+}
