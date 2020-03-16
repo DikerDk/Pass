@@ -12,21 +12,20 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Shoping.BLL.Service;
 using Shoping.DAL.EF;
 using Shoping.DAL.Entities;
 
 namespace ShopCar
 {
     public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
+    {   
         public IConfiguration Configuration { get; }
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
-        public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AppDBContext>
+       
+
+      /*  public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AppDBContext>
         {
             public AppDBContext CreateDbContext(string[] args)
             {
@@ -39,9 +38,12 @@ namespace ShopCar
                 builder.UseSqlServer(connectionString);
                 return new AppDBContext(builder.Options);
             }
-        }
+        }*/
         public void ConfigureServices(IServiceCollection services)
         {
+            //подключаем конфиг из appsetting.json
+            Configuration.Bind("Project", new Config());
+
             services.AddDbContext<AppDBContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 

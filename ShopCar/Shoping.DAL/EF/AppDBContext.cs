@@ -13,5 +13,8 @@ namespace Shoping.DAL.EF
     {
         public AppDBContext(DbContextOptions<AppDBContext> options)
              : base(options) { Database.Migrate(); }
+        public DbSet<TextField> TextFields { get; set; }
+        public DbSet<ServiceItem> ServiceItems { get; set; }
+
     }
 }
