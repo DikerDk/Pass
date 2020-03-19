@@ -1,4 +1,4 @@
-﻿
+﻿using Shoping.BLL.Service;
 using Microsoft.AspNetCore.Mvc;
 using Shoping.DAL.EF;
 using Shoping.DAL.Entities;
@@ -30,7 +30,7 @@ namespace ShopCar.Controllers
             if (ModelState.IsValid)
             {
                 dataManager.TextFields.SaveTextField(model);
-                return RedirectToAction(nameof(HomeController.Index));
+               return RedirectToAction(nameof(AdminController.Index), nameof(AdminController).CutController());
             }
             return View(model);
         }

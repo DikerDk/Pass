@@ -188,8 +188,9 @@ namespace Shoping.DAL.Migrations
 
             modelBuilder.Entity("Shoping.DAL.Entities.ServiceItem", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateAdded");
 
@@ -215,8 +216,9 @@ namespace Shoping.DAL.Migrations
 
             modelBuilder.Entity("Shoping.DAL.Entities.TextField", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CodeWord")
                         .IsRequired();

@@ -12,28 +12,21 @@ namespace ShopCar.Controllers
 {
     public class HomeController : Controller
     {
-      
         private readonly DataManager dataManager;
+
         public HomeController(DataManager dataManager)
         {
             this.dataManager = dataManager;
         }
+
         public IActionResult Index()
         {
-            return View(dataManager.ServiceItems.GetServiceItems());
+            return View(dataManager.TextFields.GetTextFieldByCodeWord("PageIndex"));
         }
 
-       
-
-        public IActionResult Privacy()
+        public IActionResult Contact()
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(dataManager.TextFields.GetTextFieldByCodeWord("PageContacts"));
         }
     }
 }

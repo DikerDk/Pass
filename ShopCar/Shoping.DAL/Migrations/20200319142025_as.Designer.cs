@@ -10,8 +10,8 @@ using Shoping.DAL.EF;
 namespace Shoping.DAL.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20200316195146_frodig")]
-    partial class frodig
+    [Migration("20200319142025_as")]
+    partial class @as
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -190,8 +190,9 @@ namespace Shoping.DAL.Migrations
 
             modelBuilder.Entity("Shoping.DAL.Entities.ServiceItem", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateAdded");
 
@@ -217,8 +218,9 @@ namespace Shoping.DAL.Migrations
 
             modelBuilder.Entity("Shoping.DAL.Entities.TextField", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CodeWord")
                         .IsRequired();

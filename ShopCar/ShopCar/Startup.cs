@@ -32,26 +32,29 @@ namespace ShopCar
 
             public void ConfigureServices(IServiceCollection services)
             {
-               // получаем строку подключения из файла конфигурации
-                string connection = Configuration.GetConnectionString("DefaultConnection", new Config());
-               Configuration.Bind("Project", new Config());
-            
 
+            //подключаем конфиг из appsetting.json
+            Configuration.Bind("ConnectionStrings", new Config());
             services.AddDbContext<AppDBContext>(options =>
-                options.UseSqlServer(connection));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AppDBContext>(x => x.UseSqlServer(Config.ConnectionString));
+
+
+
+
 
             services.AddTransient<ITextFieldsRepository, EFTextFieldsRepository>();
             services.AddTransient<IServiceItemsRepository, EFServiceItemsRepository>();
             services.AddTransient<DataManager>();
+            
 
-            services.AddDbContext<AppDBContext>(x => x.UseSqlServer(Config.ConnectionString));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(opts => {
-                opts.Password.RequiredLength = 5;   
-                opts.Password.RequireNonAlphanumeric = false;   
-                opts.Password.RequireLowercase = false; 
-                opts.Password.RequireUppercase = false; 
-                opts.Password.RequireDigit = false; 
+             //   opts.Password.RequiredLength = 5;   
+              //  opts.Password.RequireNonAlphanumeric = false;   
+               // opts.Password.RequireLowercase = false; 
+               // opts.Password.RequireUppercase = false; 
+               // opts.Password.RequireDigit = false; 
             })
                .AddEntityFrameworkStores<AppDBContext>();
 
