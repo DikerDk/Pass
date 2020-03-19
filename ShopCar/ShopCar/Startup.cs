@@ -33,13 +33,18 @@ namespace ShopCar
             public void ConfigureServices(IServiceCollection services)
             {
                // получаем строку подключения из файла конфигурации
-                string connection = Configuration.GetConnectionString("DefaultConnection");
-               // добавляем контекст MobileContext в качестве сервиса в приложение
-                services.AddDbContext<AppDBContext>(options =>
+                string connection = Configuration.GetConnectionString("DefaultConnection", new Config());
+               Configuration.Bind("Project", new Config());
+            
+
+            services.AddDbContext<AppDBContext>(options =>
                 options.UseSqlServer(connection));
+
             services.AddTransient<ITextFieldsRepository, EFTextFieldsRepository>();
             services.AddTransient<IServiceItemsRepository, EFServiceItemsRepository>();
             services.AddTransient<DataManager>();
+
+            services.AddDbContext<AppDBContext>(x => x.UseSqlServer(Config.ConnectionString));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(opts => {
                 opts.Password.RequiredLength = 5;   
@@ -50,10 +55,7 @@ namespace ShopCar
             })
                .AddEntityFrameworkStores<AppDBContext>();
 
-
-
-
-
+                                 
             services.AddControllersWithViews();
             }
 
