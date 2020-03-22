@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Shoping.DAL.EF;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace ShopCar.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController:Controller
     {
         private readonly DataManager dataManager;

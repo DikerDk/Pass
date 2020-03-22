@@ -1,4 +1,16 @@
 ﻿@model Shoping.PL.ViewModels.LoginViewModel
+@using Shoping.DAL.Entities
+@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Http
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+
+
+
+
 
 <h2>Вход в приложение</h2>
 <form method="post" asp-controller="Account" asp-action="Login"

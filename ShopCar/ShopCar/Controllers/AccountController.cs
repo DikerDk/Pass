@@ -6,13 +6,14 @@ using Shoping.PL.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Management;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ShopCar.Controllers
 {
-    
-    public class AccountController:Controller
+
+    public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -32,12 +33,12 @@ namespace ShopCar.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = new ApplicationUser { Email = model.Email, UserName = model.Email};
-               
+                ApplicationUser user = new ApplicationUser { Email = model.Email, UserName = model.Email };
+
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    
+
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
                 }
@@ -85,13 +86,15 @@ namespace ShopCar.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
+
         public async Task<IActionResult> Logout()
         {
-            // удаляем аутентификационные куки
-            await _signInManager.SignOutAsync();
+           
+             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+          
     }
+   
 }

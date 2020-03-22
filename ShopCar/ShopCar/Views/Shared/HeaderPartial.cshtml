@@ -11,6 +11,9 @@
                         <a asp-controller="Services" asp-action="Index" asp-route-id="">Наши услуги</a>
                         <a asp-controller="Home" asp-action="Contact">Контакты</a>
                         
+
+
+                        @await Html.PartialAsync("LoginPartial")
                     </nav>
                 </header>
 

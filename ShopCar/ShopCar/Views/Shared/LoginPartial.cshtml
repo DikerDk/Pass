@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Shoping.DAL.Entities
+@using System.Security.Claims
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>@User.Identity.Name</p>
+
+    <form button id="button" type="button"  asp-controller="Account" asp-action="Logout">
+        <input  value="Выход" />
+    </form>
+}
+else
+{
+    <a asp-controller="Account" asp-action="Login">Вход</a>
+    <a asp-controller="Account" asp-action="Register">Регистрация</a>
+}

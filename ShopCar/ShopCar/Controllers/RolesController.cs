@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Shoping.DAL.Entities;
 using Shoping.PL.ViewModels;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace ShopCar.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RolesController:Controller
     {
        
@@ -80,7 +82,8 @@ namespace ShopCar.Controllers
                 return NotFound();
             }
             [HttpPost]
-            public async Task<IActionResult> Edit(string userId, List<string> roles)
+            
+        public async Task<IActionResult> Edit(string userId, List<string> roles)
             {
             // получаем пользователя
             ApplicationUser user = await _userManager.FindByIdAsync(userId);

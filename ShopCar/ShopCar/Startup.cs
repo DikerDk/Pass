@@ -33,6 +33,7 @@ namespace ShopCar
             public void ConfigureServices(IServiceCollection services)
             {
 
+
             //подключаем конфиг из appsetting.json
             Configuration.Bind("ConnectionStrings", new Config());
             services.AddDbContext<AppDBContext>(options =>
@@ -50,15 +51,24 @@ namespace ShopCar
 
 
             services.AddIdentity<ApplicationUser, IdentityRole>(opts => {
-             //   opts.Password.RequiredLength = 5;   
-              //  opts.Password.RequireNonAlphanumeric = false;   
-               // opts.Password.RequireLowercase = false; 
-               // opts.Password.RequireUppercase = false; 
-               // opts.Password.RequireDigit = false; 
+               opts.Password.RequiredLength = 5;   
+                opts.Password.RequireNonAlphanumeric = false;   
+                opts.Password.RequireLowercase = false; 
+                opts.Password.RequireUppercase = false; 
+               opts.Password.RequireDigit = false; 
             })
+
                .AddEntityFrameworkStores<AppDBContext>();
 
-                                 
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(1440);
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+                options.SlidingExpiration = true;
+            });
             services.AddControllersWithViews();
             }
 
@@ -74,6 +84,7 @@ namespace ShopCar
                     app.UseExceptionHandler("/Home/Error");
                     app.UseHsts();
                 }
+                app.UseAuthentication();
                 app.UseHttpsRedirection();
                 app.UseStaticFiles();
 
