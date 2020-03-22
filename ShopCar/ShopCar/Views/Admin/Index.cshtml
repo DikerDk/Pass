@@ -39,10 +39,11 @@
         <a asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageIndex">Главная</a>
         <a asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageServices">Наши услуги</a>
         <a asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageContacts">Контакты</a>
+        <a asp-action="Create" asp-controller="Users">Добавление пользователя</a>
+        <a asp-action="Index" asp-controller="Roles">Список ролей</a>
+        <a asp-action="Index" asp-controller="Users">Управление </a>
     </div>
     <div class="div-box">
-        <form asp-controller="Account" asp-action="Logout" method="post">
-            <input type="submit" value="Выйти" />
-        </form>
+        <a asp-controller="Account" asp-action="Logout">Вийти</a>
     </div>
 </div>

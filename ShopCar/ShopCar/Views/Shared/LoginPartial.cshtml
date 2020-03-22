@@ -4,13 +4,12 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-@if (User.Identity.IsAuthenticated)
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 {
-    <p>@User.Identity.Name</p>
+    <a asp-controller="Admin" asp-action="Index">Адмін-панель</a>
 
-    <form button id="button" type="button"  asp-controller="Account" asp-action="Logout">
-        <input  value="Выход" />
-    </form>
+    <a asp-controller="Account" asp-action="Logout">Вийти</a>
+
 }
 else
 {

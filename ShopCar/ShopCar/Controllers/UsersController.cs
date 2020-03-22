@@ -100,7 +100,7 @@ namespace ShopCar.Controllers
                 return RedirectToAction("Index");
             }
 
-
+        [HttpPost]
         public async Task<IActionResult> ChangePassword(string id)
         {
             ApplicationUser user = await _userManager.FindByIdAsync(id);

@@ -1,6 +1,7 @@
 ﻿@using Shoping.PL.ViewModels
-<div class="col-4 col-12-medium">
-    <cache>
-        @(await Component.InvokeAsync<SidebarViewComponent>())
-    </cache>
-</div>
+    <div class="col-4 col-12-medium">
+        @User.Identity.Name
+        <cache>
+            @(await Component.InvokeAsync<SidebarViewComponent>())
+        </cache>
+    </div>
